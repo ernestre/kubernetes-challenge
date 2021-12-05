@@ -1,0 +1,12 @@
+replicaCount: 1
+
+nginx:
+  replicaCount: 1
+  port: 80
+  name: nginx
+  image:
+    repository: nginx
+    pullPolicy: IfNotPresent
+    tag: "1.21.4"
+  labels:
+    app: nginx
