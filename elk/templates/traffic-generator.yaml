@@ -16,5 +16,5 @@ spec:
             - ab
             - -n 1000
             - -c 5
-            - http://nginx-service/{{ .Values.nginx.port }}
+            - http://nginx-service/
           restartPolicy: OnFailure
