@@ -13,6 +13,8 @@ spec:
     metadata:
       labels:
         app: nginx
+      annotations:
+        fluentbit.io/parser: nginx
     spec:
       containers:
       - name: {{ .Values.nginx.name }}
