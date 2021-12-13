@@ -1,30 +1,34 @@
+# https://github.com/digitalocean/terraform-provider-digitalocean/blob/main/examples/kubernetes/main.tf
 terraform {
   required_providers {
     digitalocean = {
-      source = "digitalocean/digitalocean"
-      version = "~> 2.0"
+      source  = "digitalocean/digitalocean"
+      version = ">= 2.4.0"
     }
   }
 }
 
-variable "do_token" {
-    type = string
+
+resource "random_id" "cluster_name" {
+  byte_length = 5
 }
 
-provider "digitalocean" {
-  token = var.do_token
+locals {
+  cluster_name = "tf-k8s-${random_id.cluster_name.hex}"
 }
 
-resource "digitalocean_kubernetes_cluster" "k8s-challange" {
-  name   = "k8s-challange"
-  region = "ams3"
-  # Grab the latest version slug from `doctl kubernetes options versions`
-  version = "1.21.5-do.0"
+module "doks-cluster" {
+  source = "./cluster"
 
-  node_pool {
-    name       = "worker-pool"
-    # Grab the available node size with `doctl kubernetes options sizes`
-    size       = "s-1vcpu-2gb"
-    node_count = 3
-  }
+  cluster_name    = local.cluster_name
+  region          = var.region
+  worker_size     = var.worker_size
+  worker_count    = var.worker_count
+  cluster_version = var.cluster_version
+}
+
+module "elk" {
+  source = "./elk"
+
+  cluster_name = module.doks-cluster.cluster_name
 }
