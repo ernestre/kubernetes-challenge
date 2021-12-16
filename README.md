@@ -1,6 +1,8 @@
 # DigitalOcean k8s challange
 Topic: Deploy a log monitoring system
 
+Demo available [here](http://134.209.139.125/)
+
 ## Prerequisites
 * [kubectl](https://kubernetes.io/docs/tasks/tools/), the Kubernetes command-line tool
 * [helm](https://helm.sh/docs/intro/install/),  package manager for
@@ -626,9 +628,9 @@ module.doks-cluster.digitalocean_kubernetes_cluster.primary: Still creating... [
 module.doks-cluster.digitalocean_kubernetes_cluster.primary: Still creating... [6m30s elapsed]
 module.doks-cluster.digitalocean_kubernetes_cluster.primary: Still creating... [6m40s elapsed]
 module.doks-cluster.digitalocean_kubernetes_cluster.primary: Still creating... [6m50s elapsed]
-module.doks-cluster.digitalocean_kubernetes_cluster.primary: Creation complete after 6m55s [id=3934abf5-2263-4c99-85a1-91296726bdc4]
+module.doks-cluster.digitalocean_kubernetes_cluster.primary: Creation complete after 6m55s [id=2803091e-7f38-45ee-a907-1b034ccfbcfb]
 module.elk.data.digitalocean_kubernetes_cluster.primary: Reading...
-module.elk.data.digitalocean_kubernetes_cluster.primary: Read complete after 1s [id=3934abf5-2263-4c99-85a1-91296726bdc4]
+module.elk.data.digitalocean_kubernetes_cluster.primary: Read complete after 1s [id=2803091e-7f38-45ee-a907-1b034ccfbcfb]
 module.elk.data.kubernetes_service.lb: Reading...
 module.elk.kubernetes_service.lb: Creating...
 module.elk.helm_release.kibana: Creating...
@@ -685,8 +687,8 @@ Apply complete! Resources: 7 added, 0 changed, 0 destroyed.
 
 Outputs:
 
-cluster_id = "3934abf5-2263-4c99-85a1-91296726bdc4"
-kibana_lb_ip = "188.166.134.187"
+cluster_id = "2803091e-7f38-45ee-a907-1b034ccfbcfb"
+kibana_lb_ip = "134.209.139.125"
 ```
 </p>
 </details>
@@ -697,11 +699,11 @@ public IP. If it's not shown you, can check the output with `terraform output`
 ```
 $ DIGITALOCEAN_TOKEN=<YOUR API TOKEN> terraform output
 
-cluster_id = "3934abf5-2263-4c99-85a1-91296726bdc4"
-kibana_lb_ip = "188.166.134.187"
+cluster_id = "2803091e-7f38-45ee-a907-1b034ccfbcfb"
+kibana_lb_ip = "134.209.139.125"
 ```
 
-Now you can check the logs at `http://188.166.134.187/app/discover`
+Now you can check the logs at `http://134.209.139.125/app/discover`
 
 
 ## Destroying the cluster
@@ -719,7 +721,7 @@ kubectl using doctl. To get kubeconfig run the following command with you're
 cluster's ID from the terraform's output
 
 ```
-doctl kubernetes cluster kubeconfig save 3934abf5-2263-4c99-85a1-91296726bdc4
+doctl kubernetes cluster kubeconfig save 2803091e-7f38-45ee-a907-1b034ccfbcfb
 Notice: Adding cluster credentials to kubeconfig file found in "/home/erre/.kube/config"
 Notice: Setting current-context to do-ams3-tf-k8s-2192495049
 ```
