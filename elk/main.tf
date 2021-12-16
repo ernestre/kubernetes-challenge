@@ -55,15 +55,23 @@ resource "helm_release" "fluentbit" {
   version = "0.19.9"
 }
 
+resource "random_id" "lb_name" {
+  byte_length = 5
+}
+
+locals {
+  kibana_lb_name = "kibana-lb-${random_id.lb_name.hex}"
+}
+
 data "kubernetes_service" "lb" {
   metadata {
-    name = "kibana-lb"
+    name = local.kibana_lb_name
   }
 }
 
 resource "kubernetes_service" "lb" {
   metadata {
-    name = "kibana-lb"
+    name = local.kibana_lb_name
   }
   spec {
     selector = {
