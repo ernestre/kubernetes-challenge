@@ -55,6 +55,12 @@ resource "helm_release" "fluentbit" {
   version = "0.19.9"
 }
 
+data "kubernetes_service" "lb" {
+  metadata {
+    name = "kibana-lb"
+  }
+}
+
 resource "kubernetes_service" "lb" {
   metadata {
     name = "kibana-lb"
