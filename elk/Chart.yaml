@@ -1,6 +1,0 @@
-apiVersion: v2
-name: k8s-challange
-description: A Helm chart for k8s log monitoring system challnage
-type: application
-version: 0.1.0
-appVersion: "0.1.0"
